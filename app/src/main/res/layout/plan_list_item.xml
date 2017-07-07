@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Date" />
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/headingTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Heading"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/teacherTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Teacher"
+            android:textAlignment="center" />
+
+    </TableRow>
+</LinearLayout>
