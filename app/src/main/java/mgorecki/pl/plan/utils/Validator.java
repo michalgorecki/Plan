@@ -1,4 +1,4 @@
-package mgorecki.pl.contactbook.utils;
+package mgorecki.pl.plan.utils;
 
 import android.util.Patterns;
 

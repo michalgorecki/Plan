@@ -1,4 +1,4 @@
-package mgorecki.pl.contactbook;
+package mgorecki.pl.plan;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

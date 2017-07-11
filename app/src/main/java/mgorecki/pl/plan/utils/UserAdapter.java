@@ -1,4 +1,4 @@
-package mgorecki.pl.contactbook.utils;
+package mgorecki.pl.plan.utils;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,12 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import mgorecki.pl.contactbook.R;
-import mgorecki.pl.contactbook.db.AppDatabase;
-import mgorecki.pl.contactbook.domain.User;
+import mgorecki.pl.plan.R;
+import mgorecki.pl.plan.db.AppDatabase;
+import mgorecki.pl.plan.domain.User;
 
 /**
  * Created by emigore on 2017-07-05.

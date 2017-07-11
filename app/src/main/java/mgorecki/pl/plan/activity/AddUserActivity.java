@@ -1,4 +1,4 @@
-package mgorecki.pl.contactbook.activity;
+package mgorecki.pl.plan.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,11 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import mgorecki.pl.contactbook.R;
-import mgorecki.pl.contactbook.db.AppDatabase;
-import mgorecki.pl.contactbook.domain.User;
-import mgorecki.pl.contactbook.utils.DatabaseInit;
-import mgorecki.pl.contactbook.utils.Validator;
+import mgorecki.pl.plan.R;
+import mgorecki.pl.plan.db.AppDatabase;
+import mgorecki.pl.plan.domain.User;
+import mgorecki.pl.plan.utils.DatabaseInit;
+import mgorecki.pl.plan.utils.Validator;
 
 public class AddUserActivity extends AppCompatActivity {
 

@@ -1,16 +1,12 @@
-package mgorecki.pl.contactbook.utils;
+package mgorecki.pl.plan.utils;
 
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import mgorecki.pl.contactbook.db.AppDatabase;
-import mgorecki.pl.contactbook.domain.PlanItem;
-import mgorecki.pl.contactbook.domain.User;
+import mgorecki.pl.plan.db.AppDatabase;
+import mgorecki.pl.plan.domain.PlanItem;
+import mgorecki.pl.plan.domain.User;
 
 /**
  * Created by emigore on 2017-07-04.
@@ -34,15 +30,7 @@ public class DatabaseInit {
     }
 
     private static void populateWithTestData(AppDatabase db) {
-        String pattern = "yyyy-MM-dd hh:mm";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        Date date = null;
-        try {
-            date = simpleDateFormat.parse("2017-07-23 10:30");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        PlanItem planItem = new PlanItem("Matematyka","Algebra liniowa","Jan Kowalski",date);
+        PlanItem planItem = new PlanItem("Matematyka","Algebra liniowa","Jan Kowalski","12:00");
         db.planItemDao().insertAll(planItem);
 
         Log.d(TAG,"Items in the planitem: "+db.planItemDao().countPlanItem());

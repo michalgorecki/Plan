@@ -1,9 +1,9 @@
-package mgorecki.pl.contactbook.utils;
+package mgorecki.pl.plan.utils;
 
 import android.content.Context;
 
-import mgorecki.pl.contactbook.db.AppDatabase;
-import mgorecki.pl.contactbook.domain.PlanItem;
+import mgorecki.pl.plan.db.AppDatabase;
+import mgorecki.pl.plan.domain.PlanItem;
 
 /**
  * Created by emigore on 2017-07-07.

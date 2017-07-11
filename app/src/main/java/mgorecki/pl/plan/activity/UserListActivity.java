@@ -1,23 +1,16 @@
-package mgorecki.pl.contactbook.activity;
+package mgorecki.pl.plan.activity;
 
 import android.app.ListActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import mgorecki.pl.contactbook.R;
-import mgorecki.pl.contactbook.db.AppDatabase;
-import mgorecki.pl.contactbook.domain.User;
-import mgorecki.pl.contactbook.utils.UserAdapter;
+import mgorecki.pl.plan.R;
+import mgorecki.pl.plan.db.AppDatabase;
+import mgorecki.pl.plan.domain.User;
+import mgorecki.pl.plan.utils.UserAdapter;
 
 public class UserListActivity extends ListActivity {
 

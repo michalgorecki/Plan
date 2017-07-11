@@ -1,4 +1,4 @@
-package mgorecki.pl.contactbook.dao;
+package mgorecki.pl.plan.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -7,7 +7,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
-import mgorecki.pl.contactbook.domain.PlanItem;
+import mgorecki.pl.plan.domain.PlanItem;
 
 /**
  * Created by emigore on 2017-07-06.

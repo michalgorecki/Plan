@@ -10,11 +10,14 @@
         android:weightSum="4">
 
         <TextView
-            android:id="@+id/dateTextView"
+            android:id="@+id/timeTextView"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Date" />
+            android:inputType="time"
+            android:text="Time"
+            android:textSize="@dimen/fab_margin"
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/nameTextView"
@@ -22,7 +25,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Name"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="@dimen/fab_margin"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/headingTextView"
@@ -30,7 +35,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Heading"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="@dimen/fab_margin" />
 
         <TextView
             android:id="@+id/teacherTextView"
@@ -38,7 +44,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Teacher"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="@dimen/fab_margin" />
 
     </TableRow>
 </LinearLayout>

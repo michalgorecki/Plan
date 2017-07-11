@@ -1,4 +1,4 @@
-package mgorecki.pl.contactbook.db;
+package mgorecki.pl.plan.db;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
@@ -6,17 +6,17 @@ import android.arch.persistence.room.RoomDatabase;
 import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
-import mgorecki.pl.contactbook.dao.PlanItemDao;
-import mgorecki.pl.contactbook.dao.UserDao;
-import mgorecki.pl.contactbook.domain.PlanItem;
-import mgorecki.pl.contactbook.domain.User;
-import mgorecki.pl.contactbook.utils.Converters;
+import mgorecki.pl.plan.dao.PlanItemDao;
+import mgorecki.pl.plan.dao.UserDao;
+import mgorecki.pl.plan.domain.PlanItem;
+import mgorecki.pl.plan.domain.User;
+import mgorecki.pl.plan.utils.Converters;
 
 /**
  * Created by emigore on 2017-07-04.
  */
 
-@Database(entities = {User.class, PlanItem.class}, version = 3)
+@Database(entities = {User.class, PlanItem.class}, version = 4)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 

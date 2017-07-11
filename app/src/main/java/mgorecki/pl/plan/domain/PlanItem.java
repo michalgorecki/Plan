@@ -1,26 +1,21 @@
-package mgorecki.pl.contactbook.domain;
+package mgorecki.pl.plan.domain;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverter;
-
-import java.util.Date;
 
 /**
  * Created by emigore on 2017-07-06.
  */
 
-@Entity(tableName = "planitem", indices = {@Index(value = {"date"}, unique = true)}
-    )
+@Entity(tableName = "planitem")
 public class PlanItem {
 
-    public PlanItem(String name,String heading,String teacher, Date date){
+    public PlanItem(String name,String heading,String teacher, String time){
         this.name = name;
         this.heading = heading;
         this.teacher = teacher;
-        this.date = date;
+        this.time = time;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -36,8 +31,8 @@ public class PlanItem {
     private String teacher;
 
 
-    @ColumnInfo(name = "date")
-    private Date date;
+    @ColumnInfo(name = "time")
+    private String time;
 
     public int getUid() {
         return uid;
@@ -71,14 +66,11 @@ public class PlanItem {
         this.teacher = teacher;
     }
 
-    public Date getDate() {
-        return date;
+    public String getTime() {
+        return time;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTime(String time) {
+        this.time = time;
     }
-
-
-
 }

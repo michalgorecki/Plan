@@ -1,4 +1,4 @@
-package mgorecki.pl.contactbook;
+package mgorecki.pl.plan;
 
 import org.junit.Test;
 
