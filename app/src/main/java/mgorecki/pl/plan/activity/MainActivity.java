@@ -8,7 +8,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -30,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = (ListView) findViewById(R.id.listview);
+
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
 
@@ -38,6 +44,15 @@ public class MainActivity extends AppCompatActivity {
 
         PlanItemAdapter adapter = new PlanItemAdapter(this, planList);
         listView.setAdapter(adapter);
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG,"Item clicked...");
+                Toast.makeText(MainActivity.this,"ASDASD",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override
@@ -59,5 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 
 }

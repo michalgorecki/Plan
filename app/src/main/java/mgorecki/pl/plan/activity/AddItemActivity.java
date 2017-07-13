@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import mgorecki.pl.plan.R;
 import mgorecki.pl.plan.domain.PlanItem;
@@ -23,7 +24,6 @@ public class AddItemActivity extends AppCompatActivity {
     Calendar myCalendar;
     Button clearButton;
     Button submitButton;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +43,20 @@ public class AddItemActivity extends AppCompatActivity {
 
     public void submitOnClick(View v){
         Log.d(TAG,"Adding item to db");
-        String time = timePicker.getHour()+":"+timePicker.getMinute();
-
+        String time = String.format("%02d:%02d",timePicker.getHour(),timePicker.getMinute());
         Log.d(TAG,"Time string: "+time);
-        PlanItem item = new PlanItem(nameEditText.getText().toString(),headingEditText.getText().toString(),teacherEditText.getText().toString(),time);
-        MyDbHelper.addItem(this,item);
-        clearForm();
-        goBackToMain();
+        String name = nameEditText.getText().toString();
+        String heading = headingEditText.getText().toString();
+        String teacher = teacherEditText.getText().toString();
+        if(name.isEmpty() || heading.isEmpty() || teacher.isEmpty()){
+            Toast.makeText(this,"There's an empty field!",Toast.LENGTH_SHORT).show();
+        }else{
+            PlanItem item = new PlanItem(name,heading,teacher,time);
+            MyDbHelper.addItem(this,item);
+            clearForm();
+            goBackToMain();
+        }
     }
-
 
     private void clearForm(){
         nameEditText.getText().clear();

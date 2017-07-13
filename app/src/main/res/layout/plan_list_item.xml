@@ -16,7 +16,8 @@
             android:layout_weight="1"
             android:inputType="time"
             android:text="Time"
-            android:textSize="@dimen/fab_margin"
+            android:textSize="20dp"
+            android:focusable="false"
             android:textStyle="italic" />
 
         <TextView
@@ -26,7 +27,8 @@
             android:layout_weight="1"
             android:text="Name"
             android:textAlignment="center"
-            android:textSize="@dimen/fab_margin"
+            android:textSize="20dp"
+            android:focusable="false"
             android:textStyle="bold" />
 
         <TextView
@@ -36,7 +38,8 @@
             android:layout_weight="1"
             android:text="Heading"
             android:textAlignment="center"
-            android:textSize="@dimen/fab_margin" />
+            android:focusable="false"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/teacherTextView"
@@ -44,8 +47,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="Teacher"
+            android:focusable="false"
             android:textAlignment="center"
-            android:textSize="@dimen/fab_margin" />
+            android:textSize="20dp" />
 
     </TableRow>
 </LinearLayout>

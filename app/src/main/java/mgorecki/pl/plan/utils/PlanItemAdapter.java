@@ -37,6 +37,7 @@ public class PlanItemAdapter extends ArrayAdapter<PlanItem>{
         TextView teacherField = (TextView) convertView.findViewById(R.id.teacherTextView);
 
         nameField.setText(planItem.getName());
+        time.setText(planItem.getTime());
         headingField.setText(planItem.getHeading());
         teacherField.setText(planItem.getTeacher());
         return convertView;

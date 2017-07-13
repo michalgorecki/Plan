@@ -1,6 +1,7 @@
 package mgorecki.pl.plan.utils;
 
 import android.util.Patterns;
+import android.view.View;
 
 /**
  * Created by emigore on 2017-07-05.

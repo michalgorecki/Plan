@@ -15,5 +15,8 @@ public class MyDbHelper {
     public static void addItem(Context context, PlanItem... items){
         AppDatabase.getAppDatabase(context).planItemDao().insertAll(items);
     }
+    public static void removeItem(Context context, PlanItem item){
+        AppDatabase.getAppDatabase(context).planItemDao().delete(item);
+    }
 
 }
