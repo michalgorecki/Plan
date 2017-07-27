@@ -35,9 +35,11 @@ public class PlanItemAdapter extends ArrayAdapter<PlanItem>{
         TextView nameField = (TextView) convertView.findViewById(R.id.nameTextView);
         TextView headingField = (TextView) convertView.findViewById(R.id.headingTextView);
         TextView teacherField = (TextView) convertView.findViewById(R.id.teacherTextView);
+        TextView weekdayField = (TextView) convertView.findViewById(R.id.weekdayTextView);
 
         nameField.setText(planItem.getName());
         time.setText(planItem.getTime());
+        weekdayField.setText(planItem.getWeekday());
         headingField.setText(planItem.getHeading());
         teacherField.setText(planItem.getTeacher());
         return convertView;

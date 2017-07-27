@@ -16,7 +16,7 @@ import mgorecki.pl.plan.utils.Converters;
  * Created by emigore on 2017-07-04.
  */
 
-@Database(entities = {User.class, PlanItem.class}, version = 4)
+@Database(entities = {User.class, PlanItem.class}, version = 5)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 

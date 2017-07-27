@@ -30,7 +30,7 @@ public class DatabaseInit {
     }
 
     private static void populateWithTestData(AppDatabase db) {
-        PlanItem planItem = new PlanItem("Matematyka","Algebra liniowa","Jan Kowalski","12:00");
+        PlanItem planItem = new PlanItem("Matematyka","Algebra liniowa","Jan Kowalski","12:00","Wednesday");
         db.planItemDao().insertAll(planItem);
 
         Log.d(TAG,"Items in the planitem: "+db.planItemDao().countPlanItem());

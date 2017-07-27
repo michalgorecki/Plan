@@ -3,6 +3,7 @@ package mgorecki.pl.plan.domain;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.util.StringUtil;
 
 /**
  * Created by emigore on 2017-07-06.
@@ -11,11 +12,12 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "planitem")
 public class PlanItem {
 
-    public PlanItem(String name,String heading,String teacher, String time){
+    public PlanItem(String name,String heading,String teacher, String time,String weekday){
         this.name = name;
         this.heading = heading;
         this.teacher = teacher;
         this.time = time;
+        this.weekday = weekday;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -30,6 +32,8 @@ public class PlanItem {
     @ColumnInfo(name = "teacher")
     private String teacher;
 
+    @ColumnInfo(name = "weekday")
+    private String weekday;
 
     @ColumnInfo(name = "time")
     private String time;
@@ -73,4 +77,13 @@ public class PlanItem {
     public void setTime(String time) {
         this.time = time;
     }
+
+    public String getWeekday() {
+        return weekday;
+    }
+
+    public void setWeekday(String weekday) {
+        this.weekday = weekday;
+    }
 }
+

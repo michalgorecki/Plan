@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class AddItemActivity extends AppCompatActivity {
     Calendar myCalendar;
     Button clearButton;
     Button submitButton;
+    Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,44 +34,50 @@ public class AddItemActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_item);
         myCalendar = Calendar.getInstance();
         clearButton = (Button) findViewById(R.id.clearButton);
-        submitButton =  (Button) findViewById(R.id.submitButton);
+        submitButton = (Button) findViewById(R.id.submitButton);
         timePicker = (TimePicker) findViewById(R.id.timePicker);
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         headingEditText = (EditText) findViewById(R.id.headingEditText);
         teacherEditText = (EditText) findViewById(R.id.teacherEditText);
-        clearButton.setOnClickListener((v)->{
+        spinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.weekdays_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        clearButton.setOnClickListener((v) -> {
             clearForm();
         });
     }
 
-    public void submitOnClick(View v){
-        Log.d(TAG,"Adding item to db");
-        String time = String.format("%02d:%02d",timePicker.getHour(),timePicker.getMinute());
-        Log.d(TAG,"Time string: "+time);
+    public void submitOnClick(View v) {
+        Log.d(TAG, "Adding item to db");
+        String time = String.format("%02d:%02d", timePicker.getHour(), timePicker.getMinute());
+        Log.d(TAG, "Time string: " + time);
         String name = nameEditText.getText().toString();
         String heading = headingEditText.getText().toString();
         String teacher = teacherEditText.getText().toString();
-        if(name.isEmpty() || heading.isEmpty() || teacher.isEmpty()){
-            Toast.makeText(this,"There's an empty field!",Toast.LENGTH_SHORT).show();
-        }else{
-            PlanItem item = new PlanItem(name,heading,teacher,time);
-            MyDbHelper.addItem(this,item);
+        String weekday = spinner.getSelectedItem().toString();
+        if (name.isEmpty() || heading.isEmpty() || teacher.isEmpty()) {
+            Toast.makeText(this, "There's an empty field!", Toast.LENGTH_SHORT).show();
+        } else {
+            PlanItem item = new PlanItem(name, heading, teacher, time,weekday);
+            MyDbHelper.addItem(this, item);
             clearForm();
             goBackToMain();
         }
     }
 
-    private void clearForm(){
+    private void clearForm() {
         nameEditText.getText().clear();
         headingEditText.getText().clear();
         teacherEditText.getText().clear();
     }
-    private void goBackToMain(){
+
+    private void goBackToMain() {
         Intent intent = new Intent(this, MainActivity.class);
         AddItemActivity.this.startActivity(intent);
     }
-
-
 
 
 }
