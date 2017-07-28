@@ -6,7 +6,6 @@ import android.util.Log;
 
 import mgorecki.pl.plan.db.AppDatabase;
 import mgorecki.pl.plan.domain.PlanItem;
-import mgorecki.pl.plan.domain.User;
 
 /**
  * Created by emigore on 2017-07-04.
@@ -24,10 +23,6 @@ public class DatabaseInit {
         populateWithTestData(db);
     }
 
-    private static User addUser(final AppDatabase db, User user) {
-        db.userDao().insertAll(user);
-        return user;
-    }
 
     private static void populateWithTestData(AppDatabase db) {
         PlanItem planItem = new PlanItem("Matematyka","Algebra liniowa","Jan Kowalski","12:00","Wednesday");

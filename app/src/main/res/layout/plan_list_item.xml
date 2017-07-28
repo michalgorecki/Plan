@@ -7,7 +7,7 @@
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="5">
+        android:weightSum="4">
 
         <TextView
             android:id="@+id/timeTextView"
@@ -39,16 +39,6 @@
             android:textAlignment="center"
             android:textSize="20dp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/headingTextView"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:focusable="false"
-            android:text="Heading"
-            android:textAlignment="center"
-            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/teacherTextView"

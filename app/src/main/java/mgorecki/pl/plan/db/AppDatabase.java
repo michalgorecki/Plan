@@ -7,22 +7,19 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import mgorecki.pl.plan.dao.PlanItemDao;
-import mgorecki.pl.plan.dao.UserDao;
 import mgorecki.pl.plan.domain.PlanItem;
-import mgorecki.pl.plan.domain.User;
 import mgorecki.pl.plan.utils.Converters;
 
 /**
  * Created by emigore on 2017-07-04.
  */
 
-@Database(entities = {User.class, PlanItem.class}, version = 5)
+@Database(entities = {PlanItem.class}, version = 6)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
-    public abstract UserDao userDao();
     public abstract PlanItemDao planItemDao();
 
     public static AppDatabase getAppDatabase(Context context){

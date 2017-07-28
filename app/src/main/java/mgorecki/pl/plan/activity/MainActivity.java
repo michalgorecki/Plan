@@ -1,59 +1,69 @@
 package mgorecki.pl.plan.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import mgorecki.pl.plan.R;
-import mgorecki.pl.plan.db.AppDatabase;
 import mgorecki.pl.plan.domain.PlanItem;
-import mgorecki.pl.plan.utils.PlanItemAdapter;
+import mgorecki.pl.plan.fragment.PagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     ListView listView;
     List<PlanItem> planList;
     Toolbar toolbar;
+    TabLayout tabLayout;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        listView = (ListView) findViewById(R.id.listview);
-
-
-
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
+        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Monday"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tuesday"));
+        tabLayout.addTab(tabLayout.newTab().setText("Wednesday"));
+        tabLayout.addTab(tabLayout.newTab().setText("Thursday"));
+        tabLayout.addTab(tabLayout.newTab().setText("Friday"));
+        tabLayout.addTab(tabLayout.newTab().setText("Saturday"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sunday"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        planList = AppDatabase.getAppDatabase(this).planItemDao().getAll();
-        Log.d(TAG, "Rows count: " + AppDatabase.getAppDatabase(this).planItemDao().countPlanItem());
-
-        PlanItemAdapter adapter = new PlanItemAdapter(this, planList);
-        listView.setAdapter(adapter);
-        listView.setClickable(true);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter
+                (getSupportFragmentManager());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG,"Item clicked...");
-                Toast.makeText(MainActivity.this,"ASDASD",Toast.LENGTH_SHORT).show();
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
             }
         });
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
