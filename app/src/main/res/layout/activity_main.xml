@@ -22,20 +22,11 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="-1dp" />
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar2" />
-
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <ListView
+        android:id="@+id/planlistview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        android:layout_below="@+id/toolbar2" />
 
 
 </RelativeLayout>

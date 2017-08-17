@@ -2,6 +2,7 @@ package mgorecki.pl.plan.utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +19,14 @@ import mgorecki.pl.plan.domain.PlanItem;
  */
 
 public class PlanItemAdapter extends ArrayAdapter<PlanItem>{
-
+    public static final String TAG = "PlanItemAdapter";
 
     public PlanItemAdapter(@NonNull Context context, List<PlanItem> planItemList) {
         super(context, 0,planItemList);
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
+        Log.d(TAG,"ENTER: getView()");
         final PlanItem planItem = getItem(position);
 
         if(convertView == null){
@@ -36,10 +38,12 @@ public class PlanItemAdapter extends ArrayAdapter<PlanItem>{
         TextView teacherField = (TextView) convertView.findViewById(R.id.teacherTextView);
         TextView weekdayField = (TextView) convertView.findViewById(R.id.weekdayTextView);
 
+        Log.d(TAG,"Got item on position "+position+": "+planItem.getName()+" "+planItem.getWeekday()+" "+planItem.getTime());
         nameField.setText(planItem.getName());
         time.setText(planItem.getTime());
         weekdayField.setText(planItem.getWeekday());
         teacherField.setText(planItem.getTeacher());
+        Log.d(TAG,"RETURN: getView()");
         return convertView;
     }
 

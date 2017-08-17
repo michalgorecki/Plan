@@ -26,10 +26,18 @@ public interface PlanItemDao {
     @Query("SELECT COUNT(*) FROM planitem")
     int countPlanItem();
 
+    @Query("SELECT * FROM planitem where weekday=:weekday")
+    List<PlanItem> getDailyPlan(String weekday);
+
+    @Query("SELECT COUNT (*) FROM planitem where weekday like :weekday AND time LIKE :time")
+    int countItemsWithDate(String weekday,String time);
+
     @Insert
     void insertAll(PlanItem... planItems);
 
     @Delete
     void delete(PlanItem planItem);
+
+
 }
 
