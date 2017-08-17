@@ -16,6 +16,7 @@ import android.widget.Toast;
 import mgorecki.pl.plan.R;
 import mgorecki.pl.plan.domain.PlanItem;
 import mgorecki.pl.plan.utils.MyDbHelper;
+import mgorecki.pl.plan.utils.Validator;
 
 public class AddItemActivity extends AppCompatActivity {
     public static final String TAG = "AddItemActivity";
@@ -62,9 +63,13 @@ public class AddItemActivity extends AppCompatActivity {
             Toast.makeText(this, "There's an empty field!", Toast.LENGTH_SHORT).show();
         } else {
             PlanItem item = new PlanItem(name, heading, teacher, time,weekday);
-            MyDbHelper.addItem(this, item);
-            clearForm();
-            goBackToMain();
+            if (Validator.isDateUnique(item, this)) {
+                MyDbHelper.addItem(this, item);
+                clearForm();
+                goBackToMain();
+            } else {
+                Toast.makeText(this, "This date is currently taken!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
