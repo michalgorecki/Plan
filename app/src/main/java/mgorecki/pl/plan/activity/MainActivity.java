@@ -1,8 +1,8 @@
 package mgorecki.pl.plan.activity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,13 +14,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
-
 import java.util.List;
-
 import mgorecki.pl.plan.R;
-import mgorecki.pl.plan.db.AppDatabase;
 import mgorecki.pl.plan.domain.PlanItem;
+import mgorecki.pl.plan.utils.MyDbHelper;
 import mgorecki.pl.plan.utils.PlanItemAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,31 +30,31 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG,"ENTER: onCreate()");
+        Log.d(TAG, "ENTER: onCreate()");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.planlistview);
         toolbar = (Toolbar) findViewById(R.id.toolbar2);
         listView = (ListView) findViewById(R.id.planlistview);
 
-        planList = AppDatabase.getAppDatabase(this).planItemDao().getAll();
-        Log.d(TAG, "Total rows count retrieved from DB: " + AppDatabase.getAppDatabase(this).planItemDao().countPlanItem());
+        planList = MyDbHelper.getAllItems(this);
+        Log.d(TAG, "Total rows count retrieved from DB: " + MyDbHelper.getCount(this));
 
         adapter = new PlanItemAdapter(this, planList);
-        Log.d(TAG,"Rows count from adapter: "+adapter.getCount());
+        Log.d(TAG, "Rows count from adapter: " + adapter.getCount());
         listView.setAdapter(adapter);
-        Log.d(TAG,"Rows count from listview: "+listView.getCount());
+        Log.d(TAG, "Rows count from listview: " + listView.getCount());
 
         listView.setClickable(true);
-       listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "Item clicked...");
-                Toast.makeText(MainActivity.this, "ASDASD", Toast.LENGTH_SHORT).show();
+                buildDialog((PlanItem) listView.getItemAtPosition(position));
             }
         });
         setSupportActionBar(toolbar);
-        Log.d(TAG,"RETURN: onCreate()");
+        Log.d(TAG, "RETURN: onCreate()");
     }
 
     @Override
@@ -77,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "ENTER: onItemSelected()");
                 String weekday = spinner.getSelectedItem().toString();
 
-                if(weekday.equals("All")){
-                    planList = AppDatabase.getAppDatabase(MainActivity.this).planItemDao().getAll();
-                }else{
-                    planList = AppDatabase.getAppDatabase(MainActivity.this).planItemDao().getDailyPlan(weekday);
+                if (weekday.equals("All")) {
+                    planList = MyDbHelper.getAllItems(MainActivity.this);
+                } else {
+                    planList = MyDbHelper.getAllItemsPerDay(MainActivity.this,weekday);
                 }
                 for (PlanItem planItem : planList) {
                     Log.d(TAG, planItem.getName() + " " + planItem.getWeekday() + " " + planItem.getTime());
@@ -112,6 +109,33 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void buildDialog(PlanItem planItem) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder
+                .setTitle(planItem.getName())
+                .setMessage(buildDescription(planItem))
+                .setPositiveButton(R.string.delete_btn, (dialogInterface, i) -> {
+                    MyDbHelper.removeItem(this,planItem);
+                    planList = MyDbHelper.getAllItems(this);
+                    adapter.notifyDataSetChanged();
+                }).setNegativeButton(R.string.cancel_btn, (dialogInterface, i) -> {
+
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public String buildDescription(PlanItem planItem){
+        return new StringBuilder().append(planItem.getHeading())
+                .append(", ")
+                .append(planItem.getWeekday())
+                .append(", ")
+                .append(planItem.getTime())
+                .append("--> ")
+                .append(planItem.getTeacher()).toString();
     }
 
 

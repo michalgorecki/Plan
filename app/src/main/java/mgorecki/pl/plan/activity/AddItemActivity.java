@@ -60,7 +60,7 @@ public class AddItemActivity extends AppCompatActivity {
         String teacher = teacherEditText.getText().toString();
         String weekday = spinner.getSelectedItem().toString();
         if (name.isEmpty() || heading.isEmpty() || teacher.isEmpty()) {
-            Toast.makeText(this, "There's an empty field!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "There's an empty field!", Toast.LENGTH_SHORT).show();
         } else {
             PlanItem item = new PlanItem(name, heading, teacher, time,weekday);
             if (Validator.isDateUnique(item, this)) {

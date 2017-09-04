@@ -2,6 +2,8 @@ package mgorecki.pl.plan.utils;
 
 import android.content.Context;
 
+import java.util.List;
+
 import mgorecki.pl.plan.db.AppDatabase;
 import mgorecki.pl.plan.domain.PlanItem;
 
@@ -17,6 +19,16 @@ public class MyDbHelper {
     }
     public static void removeItem(Context context, PlanItem item){
         AppDatabase.getAppDatabase(context).planItemDao().delete(item);
+    }
+    public static List<PlanItem> getAllItems(Context context){
+        return AppDatabase.getAppDatabase(context).planItemDao().getAll();
+
+    }
+    public static List<PlanItem> getAllItemsPerDay(Context context,String weekday){
+        return AppDatabase.getAppDatabase(context).planItemDao().getDailyPlan(weekday);
+    }
+    public static final int getCount(Context context){
+        return AppDatabase.getAppDatabase(context).planItemDao().countPlanItem();
     }
 
 }
