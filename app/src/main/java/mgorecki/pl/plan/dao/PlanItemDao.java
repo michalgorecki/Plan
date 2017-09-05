@@ -17,7 +17,7 @@ import mgorecki.pl.plan.domain.PlanItem;
 @Dao
 public interface PlanItemDao {
 
-    @Query("SELECT * FROM planitem")
+    @Query("SELECT * FROM planitem ORDER BY time")
     List<PlanItem> getAll();
 
     @Query("SELECT * FROM planitem where teacher LIKE :teacher")
@@ -26,7 +26,7 @@ public interface PlanItemDao {
     @Query("SELECT COUNT(*) FROM planitem")
     int countPlanItem();
 
-    @Query("SELECT * FROM planitem where weekday=:weekday")
+    @Query("SELECT * FROM planitem where weekday=:weekday ORDER BY time")
     List<PlanItem> getDailyPlan(String weekday);
 
     @Query("SELECT COUNT (*) FROM planitem where weekday like :weekday AND time LIKE :time")

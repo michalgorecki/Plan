@@ -20,14 +20,14 @@ import mgorecki.pl.plan.utils.Validator;
 
 public class AddItemActivity extends AppCompatActivity {
     public static final String TAG = "AddItemActivity";
-    TimePicker timePicker;
     EditText nameEditText;
     EditText headingEditText;
     EditText teacherEditText;
     Calendar myCalendar;
     Button clearButton;
     Button submitButton;
-    Spinner spinner;
+    Spinner weekdaySpinner;
+    Spinner timeSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +36,20 @@ public class AddItemActivity extends AppCompatActivity {
         myCalendar = Calendar.getInstance();
         clearButton = (Button) findViewById(R.id.clearButton);
         submitButton = (Button) findViewById(R.id.submitButton);
-        timePicker = (TimePicker) findViewById(R.id.timePicker);
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         headingEditText = (EditText) findViewById(R.id.headingEditText);
         teacherEditText = (EditText) findViewById(R.id.teacherEditText);
-        spinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        weekdaySpinner = (Spinner) findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> weekdaySpinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.weekdays_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+
+        timeSpinner = (Spinner) findViewById(R.id.timeSpinner);
+        ArrayAdapter<CharSequence> timeSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.hours_spinner_array, android.R.layout.simple_spinner_item);
+        timeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timeSpinner.setAdapter(timeSpinnerAdapter);
+
+        weekdaySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        weekdaySpinner.setAdapter(weekdaySpinnerAdapter);
 
         clearButton.setOnClickListener((v) -> {
             clearForm();
@@ -53,12 +58,12 @@ public class AddItemActivity extends AppCompatActivity {
 
     public void submitOnClick(View v) {
         Log.d(TAG, "Adding item to db");
-        String time = String.format("%02d:%02d", timePicker.getHour(), timePicker.getMinute());
+        String time = timeSpinner.getSelectedItem().toString();
         Log.d(TAG, "Time string: " + time);
         String name = nameEditText.getText().toString();
         String heading = headingEditText.getText().toString();
         String teacher = teacherEditText.getText().toString();
-        String weekday = spinner.getSelectedItem().toString();
+        String weekday = weekdaySpinner.getSelectedItem().toString();
         if (name.isEmpty() || heading.isEmpty() || teacher.isEmpty()) {
                 Toast.makeText(this, "There's an empty field!", Toast.LENGTH_SHORT).show();
         } else {
