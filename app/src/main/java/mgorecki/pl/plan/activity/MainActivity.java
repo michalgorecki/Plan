@@ -72,20 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d(TAG, "ENTER: onItemSelected()");
-                String weekday = spinner.getSelectedItem().toString();
-
-                if (weekday.equals("All")) {
-                    planList = MyDbHelper.getAllItems(MainActivity.this);
-                } else {
-                    planList = MyDbHelper.getAllItemsPerDay(MainActivity.this,weekday);
-                }
-                for (PlanItem planItem : planList) {
-                    Log.d(TAG, planItem.getName() + " " + planItem.getWeekday() + " " + planItem.getTime());
-                }
-                adapter.clear();
-                adapter.addAll(planList);
-                adapter.notifyDataSetChanged();
-                listView.setAdapter(adapter);
+                populateListView();
                 Log.d(TAG, "RETURN: onItemSelected()");
             }
 
@@ -96,6 +83,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return true;
+    }
+
+    public void populateListView() {
+        Log.d(TAG, "ENTER: populateListView()");
+        String weekday = spinner.getSelectedItem().toString();
+
+        if (weekday.equals("All")) {
+            planList = MyDbHelper.getAllItems(MainActivity.this);
+        } else {
+            planList = MyDbHelper.getAllItemsPerDay(MainActivity.this, weekday);
+        }
+        for (PlanItem planItem : planList) {
+            Log.d(TAG, planItem.getName() + " " + planItem.getWeekday() + " " + planItem.getTime());
+        }
+        adapter.clear();
+        adapter.addAll(planList);
+        adapter.notifyDataSetChanged();
+        listView.setAdapter(adapter);
+        Log.d(TAG, "RETURN: populateListView()");
     }
 
 
@@ -119,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.delete_btn, (dialogInterface, i) -> {
                     MyDbHelper.removeItem(this,planItem);
                     planList = MyDbHelper.getAllItems(this);
-                    adapter.notifyDataSetChanged();
+                    populateListView();
                 }).setNegativeButton(R.string.cancel_btn, (dialogInterface, i) -> {
 
                 });
